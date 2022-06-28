@@ -9,8 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.service.IPersonaJdbcService;
-import com.uce.edu.demo.to.Persona;
+import com.uce.edu.demo.tarea13.service.IEstudianteJdbcService;
+import com.uce.edu.demo.tarea13.to.Estudiante;
 
 @SpringBootApplication
 public class ProyectoU2CaApplication implements CommandLineRunner{
@@ -19,7 +19,7 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 	private static final Logger logger = Logger.getLogger(ProyectoU2CaApplication.class);
 	
 	@Autowired
-	private IPersonaJdbcService personaJdbcService;
+	private IEstudianteJdbcService estudianteJdbcService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2CaApplication.class, args);
@@ -28,25 +28,32 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
     	//Insertar
-    	Persona persona = new Persona();
-    	persona.setId(2);
-    	persona.setNombre("David");
-    	persona.setApellido("Jumbo");
-    	//this.personaJdbcService.guardar(persona);
+    	Estudiante e = new Estudiante();
+    	e.setId(3);
+    	e.setNombre("José");
+    	e.setApellido("Artigas");
+    	e.setCarrera("Ingenieria en Sistemas de Información");
+    	e.setEdad(24);
+    	this.estudianteJdbcService.insertar(e);
+    	logger.info("Se insertó el estudiante"+e);
     	
     	//Actualizar
-    	Persona persona1 = new Persona();
-    	persona1.setId(1);
-    	persona1.setNombre("Pepito");
-    	persona1.setApellido("Velez");
-    	//this.personaJdbcService.actualizar(persona1);
+    	Estudiante e1 = new Estudiante();
+    	e1.setId(1);
+    	e1.setNombre("Cristian");
+    	e1.setApellido("Arboleda");
+    	e1.setCarrera("Ingenieria en Computación Gráfica");
+    	e1.setEdad(22);
+    	this.estudianteJdbcService.actualizar(e1);
+    	logger.info("Se actualizó el estudiante"+e1);
     	
     	//Eliminar
-    	//this.personaJdbcService.eliminar(4);
+    	this.estudianteJdbcService.eliminar(2);
+    	logger.info("Se eliminó el estudiante de id: "+2);
     	
     	//Buscar
-    	Persona p3 = this.personaJdbcService.buscarPorId(2);
-    	logger.info(p3);
+    	Estudiante e2 = this.estudianteJdbcService.buscarPorId(3);
+    	logger.info(e2);
     }
 
 }
