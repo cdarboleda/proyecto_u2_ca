@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.tarea13.to.Estudiante;
+import com.uce.edu.demo.tarea13.to.EstudianteTo;
 
 @Repository
 public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository{
@@ -15,22 +15,22 @@ public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public Estudiante buscarPorId(int id) {
+	public EstudianteTo buscarPorId(int id) {
 		// TODO Auto-generated method stub
 		return this.jdbcTemplate.queryForObject("select * from estudiante where id =?",
 				new Object[] {id},
-				new BeanPropertyRowMapper<Estudiante>(Estudiante.class));
+				new BeanPropertyRowMapper<EstudianteTo>(EstudianteTo.class));
 	}
 
 	@Override
-	public void insertar(Estudiante e) {
+	public void insertar(EstudianteTo e) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("insert into estudiante (id, nombre, apellido, carrera, edad) values (?,?,?,?,?)",
 				new Object[] {e.getId(), e.getNombre(), e.getApellido(), e.getCarrera(), e.getEdad()});
 	}
 
 	@Override
-	public void actualizar(Estudiante e) {
+	public void actualizar(EstudianteTo e) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("update estudiante set nombre=?, apellido=?, carrera=?, edad=? where id = ?", 
 				new Object[] {e.getNombre(), e.getApellido(), e.getCarrera(), e.getEdad(), e.getId()});
