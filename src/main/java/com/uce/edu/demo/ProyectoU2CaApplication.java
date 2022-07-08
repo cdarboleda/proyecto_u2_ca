@@ -31,26 +31,34 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
     public void run(String... args) throws Exception {
     	
     	Persona p = new Persona();
-    	p.setNombre("Omar");
-    	p.setApellido("Vélez");
-    	p.setGenero("F");
-    	p.setCedula("1751444521");
+    	p.setNombre("Cristian");
+    	p.setApellido("Arboleda");
+    	p.setGenero("M");
+    	p.setCedula("1751146786");
     	//this.personaJpaService.guardar(p);
     	//logger.info("Inserción con JPA: "+ p);
     	
     	Persona p1 = new Persona();
-    	p1.setNombre("Jorge");
-    	p1.setApellido("López");
+    	p1.setNombre("Cristian");
+    	p1.setApellido("Benítez");
     	p1.setGenero("M");
-    	p1.setCedula("17511436768");
+    	p1.setCedula("1524547863");
     	//this.personaJpaService.guardar(p1);
     	//this.personaJpaService.buscarPorCedula("17511436768");
     	//logger.info("Actualizacion con JPA: "+ p);
     	
     	List<Persona> personas = this.personaJpaService.buscarPorApellido("Vélez");
+    	List<Persona> personas2 = this.personaJpaService.buscarPorNombre("Cristian");
+    	List<Persona> personas3 = this.personaJpaService.buscarPorGenero("M");
     	
     	for (Persona per: personas) {
-    		logger.info(per);
+    		logger.info("Apellido Vélez: " +per);
+    	}
+    	for (Persona per: personas2) {
+    		logger.info("Nombre Cristian: "+per);
+    	}
+    	for (Persona per: personas3) {
+    		logger.info("Genero masculino: "+per);
     	}
     	
     }
