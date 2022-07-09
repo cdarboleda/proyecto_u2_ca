@@ -30,37 +30,13 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
     	
-    	Persona p = new Persona();
-    	p.setNombre("Cristian");
-    	p.setApellido("Arboleda");
-    	p.setGenero("M");
-    	p.setCedula("1751146786");
-    	//this.personaJpaService.guardar(p);
-    	//logger.info("Inserción con JPA: "+ p);
+    	//Actualizar con JPQL
+    	int resultado = this.personaJpaService.actualizarPorApellido("Masculino", "Vélez");
+    	logger.info("Cantidad de registros actualizados: " + resultado);
     	
-    	Persona p1 = new Persona();
-    	p1.setNombre("Cristian");
-    	p1.setApellido("Benítez");
-    	p1.setGenero("M");
-    	p1.setCedula("1524547863");
-    	//this.personaJpaService.guardar(p1);
-    	//this.personaJpaService.buscarPorCedula("17511436768");
-    	//logger.info("Actualizacion con JPA: "+ p);
-    	
-    	List<Persona> personas = this.personaJpaService.buscarPorApellido("Vélez");
-    	List<Persona> personas2 = this.personaJpaService.buscarPorNombre("Cristian");
-    	List<Persona> personas3 = this.personaJpaService.buscarPorGenero("M");
-    	
-    	for (Persona per: personas) {
-    		logger.info("Apellido Vélez: " +per);
-    	}
-    	for (Persona per: personas2) {
-    		logger.info("Nombre Cristian: "+per);
-    	}
-    	for (Persona per: personas3) {
-    		logger.info("Genero masculino: "+per);
-    	}
-    	
+    	//Eliminarcon JPQL
+    	int resultado2 = this.personaJpaService.eliminarPorGenero("Masculino");
+    	logger.info("Cantidad de registros eliminados: " + resultado2);
     }
 
 }

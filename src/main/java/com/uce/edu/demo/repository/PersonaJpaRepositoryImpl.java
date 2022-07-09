@@ -74,4 +74,21 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 		jpqlQuery.setParameter("datoNombre", nombre);	
 		return jpqlQuery.getResultList();
 	}
+
+	@Override
+	public int actualizarPorApellido(String genero, String apellido) {
+		// TODO Auto-generated method stub
+		Query query = this.entityManager.createQuery("UPDATE Persona p set p.genero= :datoGenero where p.apellido= :datoApellido");
+		query.setParameter("datoApellido", apellido);
+		query.setParameter("datoGenero", genero);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public int eliminarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		Query query = this.entityManager.createQuery("DELETE FROM Persona p where p.genero= :datoGenero");
+		query.setParameter("datoGenero", genero);
+		return query.executeUpdate();
+	}
 }
