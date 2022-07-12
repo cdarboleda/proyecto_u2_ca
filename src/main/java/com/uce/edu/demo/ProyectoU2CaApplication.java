@@ -1,8 +1,7 @@
 package com.uce.edu.demo;
 
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
@@ -12,11 +11,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.prueba2.repository.modelo.Propietario;
-import com.uce.edu.demo.prueba2.repository.modelo.Vehiculo;
 import com.uce.edu.demo.prueba2.service.IMatriculaGestorService;
 import com.uce.edu.demo.prueba2.service.IPropietarioService;
 import com.uce.edu.demo.prueba2.service.IVehiculoService;
+import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2CaApplication implements CommandLineRunner{
@@ -29,6 +28,8 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 	private IVehiculoService vehiculoService;
 	@Autowired
 	private IMatriculaGestorService matriculaGestorService;
+	@Autowired
+	private IPersonaJpaService personaJpaService;
 	
 	
 	public static void main(String[] args) {
@@ -37,34 +38,28 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-
-		//1
-		Vehiculo vehiculo = new Vehiculo();
-		vehiculo.setMarca("Totota");
-		vehiculo.setPlaca("PCT8976");
-		vehiculo.setPrecio(new BigDecimal(50000));
-		vehiculo.setTipo("L");
-		
-		//this.vehiculoService.insertar(vehiculo);
-		//logger.info(vehiculo);
-		
-		//2
-		vehiculo.setPrecio(new BigDecimal(25000));
-		vehiculo.setMarca("Honda");
-		this.vehiculoService.actualizar(vehiculo);
-		logger.info("Actualizado: " + vehiculo);
-		
-		//3
-		Propietario propietario = new Propietario();
-		propietario.setNombre("David");
-		propietario.setApellido("Jumbo");
-		propietario.setCedula("1253687452");
-		propietario.setFechaNacimiento(LocalDateTime.of(2000, 2,4,0,0));
-		this.propietarioService.crear(propietario);
-		logger.info("Crear: " +propietario);
-		
-		//4
-		//this.matriculaGestorService.generar("1751146786", "PCT8976");
+    	Persona p = new Persona();
+    	p.setApellido("Arboleda");
+    	p.setNombre("Cristian");
+    	p.setCedula("1325413685");
+    	p.setGenero("M");
+    	//this.personaJpaService.guardar(p);
+    	
+    	//Typed Query
+    	Persona p1 = this.personaJpaService.buscarPorCedulaTyped("1751146786");	
+    	logger.info("Persona Typed: "+ p1);
+    	//Named Query
+    	Persona p2 = this.personaJpaService.buscarPorCedulaNamed("1751146786");
+    	logger.info("Persona Named: "+ p2);
+    	//TypedQuery y NamedQuery
+    	Persona p3 = this.personaJpaService.buscarPorCedulaTypedNamed("1751146786");
+    	logger.info("Persona Typed y Named: "+ p3);
+    	
+    	List<Persona>  plista = this.personaJpaService.buscarPorNombreApellido("Cristian", "Arboleda");
+    	for(Persona per: plista) {
+    		logger.info("Personas: "+ per);
+    	}
+    	
     }
 
 }
