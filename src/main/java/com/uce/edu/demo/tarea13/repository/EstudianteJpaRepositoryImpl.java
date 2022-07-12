@@ -1,7 +1,11 @@
 package com.uce.edu.demo.tarea13.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -38,6 +42,55 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository{
 		// TODO Auto-generated method stub
 		Estudiante e = this.entityManager.find(Estudiante.class, id);
 		this.entityManager.remove(e);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Estudiante> buscarPorEdadNamed(Integer edad) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorEdad");
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Estudiante> buscarPorNombreNamed(String nombre) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorNombre");
+		myQuery.setParameter("datoNombre", nombre);
+		return (List<Estudiante>)myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarTodosTypedNamed() {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarTodos", Estudiante.class);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraTypedNamed(String carrera){
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorCarrera", Estudiante.class);
+		myQuery.setParameter("datoCarrera", carrera);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadMayorIgualTyped(Integer edad) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createQuery("SELECT e FROM Estudiante e where e.edad >= :datoEdad", Estudiante.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreContengaPalabra(String palabra) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createQuery("SELECT e FROM Estudiante e where e.nombre LIKE CONCAT(:datoPalabra,'%')", Estudiante.class);
+		myQuery.setParameter("datoPalabra", palabra);
+		return myQuery.getResultList();
 	}
 
 }
