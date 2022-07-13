@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -16,6 +17,9 @@ import javax.persistence.Table;
 //Forma actual de crear varios NamedQuery
 @NamedQuery(name = "Persona.buscarPorCedula", query = "SELECT p from Persona p WHERE p.cedula = : datoCedula")
 @NamedQuery(name = "Persona.buscarPorNombreApellido", query = "SELECT p FROM Persona p WHERE p.nombre = :datoNombre and p.apellido = :datoApellido")
+
+@NamedNativeQuery(name = "Persona.buscarPorCedulaNamedNative", query = "SELECT * FROM persona where pers_cedula = :datoCedula", resultClass = Persona.class)
+@NamedNativeQuery(name = "Persona.buscarPorApellidoNamedNative", query = "SELECT * FROM persona where pers_apellido = :datoApellido", resultClass = Persona.class)
 
 /*
 //Forma antigua

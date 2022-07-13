@@ -35,46 +35,21 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
     	
-    	Estudiante e1 = new Estudiante();
-    	e1.setNombre("Christian");
-    	e1.setApellido("López");
-    	e1.setEdad(21);
-    	e1.setCarrera("Diseño Gráfico");
-    	//this.estudianteJpaService.insertar(e1);
-
-    	//NAMED
-    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorNombreNamed("Gabriel");
-    	for(Estudiante e: listaEst) {
-    		logger.info("NAMED: Buscar por el nombre Gabriel " + e);
-    	}
+//    	Estudiante e1 = new Estudiante();
+//    	e1.setNombre("Christian");
+//    	e1.setApellido("López");
+//    	e1.setEdad(21);
+//    	e1.setCarrera("Diseño Gráfico");
+//    	//this.estudianteJpaService.insertar(e1);
+//
+//    	//NAMED
+//    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorNombreNamed("Gabriel");
+//    	for(Estudiante e: listaEst) {
+//    		logger.info("NAMED: Buscar por el nombre Gabriel " + e);
+//    	}
     	
-    	List<Estudiante> listaEst6 = this.estudianteJpaService.buscarPorEdadNamed(22);
-    	for(Estudiante e: listaEst6) {
-    		logger.info("NAMED: Buscar por edad " +e);
-    	}
-    	
-    	//TYPED
-    	List<Estudiante> listaEst2 = this.estudianteJpaService.buscarPorNombreContengaPalabra("C");
-    	for(Estudiante e: listaEst2) {
-    		logger.info("TYPED: Buscar por nombre que inicie con C " + e);
-    	}	
-    	
-    	List<Estudiante> listaEst3 = this.estudianteJpaService.buscarPorEdadMayorIgualTyped(21);
-    	for(Estudiante e: listaEst3) {
-    		logger.info("TYPED: Buscar por edad mayor o igual a 21 " +e);
-    	}	
-    	
-    	//TYPED NAMED
-    	List<Estudiante> listaEst5 = this.estudianteJpaService.buscarTodosTypedNamed();
-    	for(Estudiante e: listaEst5) {
-    		logger.info("TYPEDNAMED: Buscar a todos " +e);
-    	}
-    	
-    	List<Estudiante> listaEst4 = this.estudianteJpaService.buscarPorCarreraTypedNamed("Computación");
-    	for(Estudiante e: listaEst4) {
-    		logger.info("TYPEDNAMED: Buscar por carrera "+ e);
-    	}
-
+    	//logger.info(this.personaJpaService.buscarPorCedulaNative("1751146786"));
+    	logger.info(this.personaJpaService.buscarPorCedulaNamedNative("1751146786"));
     	
     }
 
