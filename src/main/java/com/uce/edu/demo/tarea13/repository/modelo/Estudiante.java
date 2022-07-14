@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -15,23 +16,26 @@ import javax.persistence.Table;
 @NamedQuery(name = "Estudiante.buscarPorNombre", query = "SELECT e FROM Estudiante e WHERE e.nombre = :datoNombre")
 @NamedQuery(name = "Estudiante.buscarPorCarrera", query = "SELECT e FROM Estudiante e WHERE e.carrera = :datoCarrera")
 @NamedQuery(name = "Estudiante.buscarTodos", query = "SELECT e FROM Estudiante e ORDER BY e.apellido ASC")
+@NamedNativeQuery(name="Estudiante.buscarPorEdadMayorIgual", query ="SELECT * FROM estudiante WHERE estu_edad >= :datoEdad", resultClass=Estudiante.class)
+@NamedNativeQuery(name="Estudiante.buscarPorNombreContengaPalabra", query ="SELECT * FROM estudiante WHERE estu_nombre LIKE CONCAT(:datoPalabra,'%')", resultClass=Estudiante.class)
+
 public class Estudiante {
 	@Id
-	@Column(name = "id")
+	@Column(name = "estu_id")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "estu_id_seq")
 	@SequenceGenerator(name = "estu_id_seq", sequenceName = "estu_id_seq", allocationSize = 1)
 	private int id;
 	
-	@Column(name = "nombre")
+	@Column(name = "estu_nombre")
 	private String nombre;
 	
-	@Column(name="apellido")
+	@Column(name="estu_apellido")
 	private String apellido;
 	
-	@Column(name="carrera")
+	@Column(name="estu_carrera")
 	private String carrera;
 	
-	@Column(name="edad")
+	@Column(name="estu_edad")
 	private int edad;
 
 	@Override

@@ -93,4 +93,38 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository{
 		return myQuery.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Estudiante> buscarPorEdadNative(Integer edad) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_edad = :datoEdad", Estudiante.class);
+		myQuery.setParameter("datoEdad", edad);
+		return (List<Estudiante>)myQuery.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Estudiante> buscarPorCarreraNative(String carrera) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_carrera = :datoCarrera", Estudiante.class);
+		myQuery.setParameter("datoCarrera", carrera);
+		return (List<Estudiante>)myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadMayorIgualNamedNative(Integer edad) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorEdadMayorIgual", Estudiante.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreContengaPalabraNamedNative(String palabra) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorNombreContengaPalabra", Estudiante.class);
+		myQuery.setParameter("datoPalabra", palabra);
+		return myQuery.getResultList();
+	}
+
 }

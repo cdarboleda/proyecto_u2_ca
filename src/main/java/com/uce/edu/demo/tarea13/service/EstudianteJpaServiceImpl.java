@@ -73,4 +73,28 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
 		return this.estudianteJpaRepository.buscarPorNombreContengaPalabra(palabra);
 	}
 
+	@Override
+	public List<Estudiante> buscarPorEdadNative(Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorEdadNative(edad);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraNative(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorCarreraNative(carrera);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadMayorIgualNamedNative(Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorEdadMayorIgualNamedNative(edad);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreContengaPalabraNamedNative(String palabra) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorNombreContengaPalabraNamedNative(palabra);
+	}
+
 }

@@ -15,4 +15,9 @@ public interface IEstudianteJpaService {
 	public List<Estudiante> buscarPorCarreraTypedNamed(String carrera);
 	public List<Estudiante> buscarPorEdadMayorIgualTyped(Integer edad);
 	public List<Estudiante> buscarPorNombreContengaPalabra(String palabra);
+	public List<Estudiante> buscarPorEdadNative(Integer edad);
+	public List<Estudiante> buscarPorCarreraNative(String carrera);
+	public List<Estudiante> buscarPorEdadMayorIgualNamedNative(Integer edad);
+	public List<Estudiante> buscarPorNombreContengaPalabraNamedNative(String palabra);
+	
 }

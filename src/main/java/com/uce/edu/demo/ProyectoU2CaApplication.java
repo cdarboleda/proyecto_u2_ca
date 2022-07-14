@@ -49,8 +49,29 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 //    	}
     	
     	//logger.info(this.personaJpaService.buscarPorCedulaNative("1751146786"));
-    	logger.info(this.personaJpaService.buscarPorCedulaNamedNative("1751146786"));
+    	//logger.info(this.personaJpaService.buscarPorCedulaNamedNative("1751146786"));
     	
+    	//NATIVE
+    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorCarreraNative("Computación");
+    	for(Estudiante e: listaEst) {
+    		logger.info("NATIVE: Buscar por carrera Computación " + e);
+    	}
+    	
+    	List<Estudiante> listaEst2 = this.estudianteJpaService.buscarPorEdadNative(21);
+    	for(Estudiante e: listaEst2) {
+    		logger.info("NATIVE: Buscar por edad 21 " + e);
+    	}
+    	
+    	//NAMED NATIVE
+    	List<Estudiante> listaEst3 = this.estudianteJpaService.buscarPorEdadMayorIgualNamedNative(21);
+    	for(Estudiante e: listaEst3) {
+    		logger.info("NAMED NATIVE: Buscar por edad mayor a 21 " + e);
+    	}
+    	
+    	List<Estudiante> listaEst4 = this.estudianteJpaService.buscarPorNombreContengaPalabraNamedNative("C");
+    	for(Estudiante e: listaEst4) {
+    		logger.info("NAMED NATIVE: Buscar por nombre que contenga letra C " + e);
+    	}
     }
 
 }
