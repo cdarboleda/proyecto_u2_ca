@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.demo.prueba2.service.IMatriculaGestorService;
 import com.uce.edu.demo.prueba2.service.IPropietarioService;
 import com.uce.edu.demo.prueba2.service.IVehiculoService;
+import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.service.IPersonaJpaService;
 import com.uce.edu.demo.tarea13.repository.modelo.Estudiante;
 import com.uce.edu.demo.tarea13.service.IEstudianteJpaService;
@@ -51,27 +52,18 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
     	//logger.info(this.personaJpaService.buscarPorCedulaNative("1751146786"));
     	//logger.info(this.personaJpaService.buscarPorCedulaNamedNative("1751146786"));
     	
-    	//NATIVE
-    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorCarreraNative("Computación");
-    	for(Estudiante e: listaEst) {
-    		logger.info("NATIVE: Buscar por carrera Computación " + e);
+    	//Busqueda con criteria api
+    	Persona p1 = this.personaJpaService.buscarPorCedulaCriteriaApi("1751146786");
+    	//logger.info("Persona Criteria API"+p1);
+    	
+    	//Busqueda dinámicamente
+    	List<Persona> listaDinamica = this.personaJpaService.buscarDinamicamente("Cristian", "Arboleda", "F");
+    	for(Persona p2: listaDinamica) {
+    		logger.info("Persona Busqueda Dinámicamente "+p2);
     	}
     	
-    	List<Estudiante> listaEst2 = this.estudianteJpaService.buscarPorEdadNative(21);
-    	for(Estudiante e: listaEst2) {
-    		logger.info("NATIVE: Buscar por edad 21 " + e);
-    	}
     	
-    	//NAMED NATIVE
-    	List<Estudiante> listaEst3 = this.estudianteJpaService.buscarPorEdadMayorIgualNamedNative(21);
-    	for(Estudiante e: listaEst3) {
-    		logger.info("NAMED NATIVE: Buscar por edad mayor a 21 " + e);
-    	}
     	
-    	List<Estudiante> listaEst4 = this.estudianteJpaService.buscarPorNombreContengaPalabraNamedNative("C");
-    	for(Estudiante e: listaEst4) {
-    		logger.info("NAMED NATIVE: Buscar por nombre que contenga letra C " + e);
-    	}
     }
 
 }
