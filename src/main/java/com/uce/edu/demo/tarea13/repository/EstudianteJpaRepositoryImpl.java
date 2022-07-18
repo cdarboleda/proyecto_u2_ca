@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -125,6 +129,55 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository{
 		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorNombreContengaPalabra", Estudiante.class);
 		myQuery.setParameter("datoPalabra", palabra);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadCriteria(Integer edad) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myQuery = myBuilder.createQuery(Estudiante.class);
+		Root<Estudiante> estudianteFrom =  myQuery.from(Estudiante.class);
+		Predicate predicadoEdad;
+		
+		//si la edad es número par devuelve los estudiantes que sean mayor o igual a esa edad
+		if (edad %2 ==0) {
+			predicadoEdad = myBuilder.greaterThanOrEqualTo(estudianteFrom.get("edad"), edad);
+		}else {
+			//caso contrario devuelve a los que sean menor o igual a esa edad
+			predicadoEdad = myBuilder.lessThanOrEqualTo(estudianteFrom.get("edad"), edad);
+		}
+		
+		myQuery.select(estudianteFrom).where(predicadoEdad);
+		
+		TypedQuery<Estudiante> queryFinal = this.entityManager.createQuery(myQuery);
+		
+		return queryFinal.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorCarreraCriteria(String carrera) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myQuery = myBuilder.createQuery(Estudiante.class);
+		Root<Estudiante> estudianteFrom = myQuery.from(Estudiante.class);
+		Predicate predicadoCarrera;
+		
+		//Si la carrera es Computación buscar a los estudiantes con inicial C
+		if (carrera.equals("Computación")) {
+			predicadoCarrera = myBuilder.equal(estudianteFrom.get("carrera"), "Computación");
+			Predicate predicadoNombre = myBuilder.like(estudianteFrom.get("nombre"), "C%");
+			Predicate predicadoAux = myBuilder.and(predicadoCarrera, predicadoNombre);
+			myQuery.select(estudianteFrom).where(predicadoAux);
+		}else {
+			//Caso contrario buscar a todos los que no son Computación
+			predicadoCarrera = myBuilder.notEqual(estudianteFrom.get("carrera"), "Computación");
+			myQuery.select(estudianteFrom).where(predicadoCarrera);
+		}
+	
+		TypedQuery<Estudiante> queryFinal = this.entityManager.createQuery(myQuery);
+		
+		return queryFinal.getResultList();
+
 	}
 
 }

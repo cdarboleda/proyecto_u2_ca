@@ -17,6 +17,8 @@ public interface IEstudianteJpaRepository {
 	public List<Estudiante> buscarPorCarreraNative(String carrera);
 	public List<Estudiante> buscarPorEdadMayorIgualNamedNative(Integer edad);
 	public List<Estudiante> buscarPorNombreContengaPalabraNamedNative(String palabra);
+	public List<Estudiante> buscarPorEdadCriteria(Integer edad);
+	public List<Estudiante> buscarPorCarreraCriteria(String carrera);
 	public void actualizar(Estudiante e);
 	public void eliminar(Integer id);
 }

@@ -43,25 +43,22 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 //    	e1.setCarrera("Diseño Gráfico");
 //    	//this.estudianteJpaService.insertar(e1);
 //
-//    	//NAMED
-//    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorNombreNamed("Gabriel");
-//    	for(Estudiante e: listaEst) {
-//    		logger.info("NAMED: Buscar por el nombre Gabriel " + e);
-//    	}
-    	
-    	//logger.info(this.personaJpaService.buscarPorCedulaNative("1751146786"));
-    	//logger.info(this.personaJpaService.buscarPorCedulaNamedNative("1751146786"));
-    	
-    	//Busqueda con criteria api
-    	Persona p1 = this.personaJpaService.buscarPorCedulaCriteriaApi("1751146786");
-    	//logger.info("Persona Criteria API"+p1);
-    	
-    	//Busqueda dinámicamente
-    	List<Persona> listaDinamica = this.personaJpaService.buscarDinamicamente("Cristian", "Arboleda", "F");
-    	for(Persona p2: listaDinamica) {
-    		logger.info("Persona Busqueda Dinámicamente "+p2);
+    	//Criteria
+    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorCarreraCriteria("Computación");
+		logger.info("CRITERIA: Buscar por carrera: Computación"+
+				"\nSi la carrera es Computación buscar a los estudiantes con inicial C" +
+				"\nCaso contrario buscar a todos los que no son Computación");
+    	for(Estudiante e: listaEst) {
+    		logger.info(e);
     	}
     	
+    	List<Estudiante> listaEst1 = this.estudianteJpaService.buscarPorEdadCriteria(21);
+		logger.info("CRITERIA 2: Buscar por edad: 21"+
+				"\nSi la edad es número par devuelve los estudiantes que sean mayor o igual a esa edad" +
+				"\nCaso contrario devuelve a los que sean menor o igual a esa edad");
+    	for(Estudiante e: listaEst1) {
+    		logger.info(e);
+    	}
     	
     	
     }
