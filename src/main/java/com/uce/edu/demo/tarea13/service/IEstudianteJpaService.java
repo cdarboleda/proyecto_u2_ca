@@ -3,6 +3,8 @@ package com.uce.edu.demo.tarea13.service;
 import java.util.List;
 
 import com.uce.edu.demo.tarea13.repository.modelo.Estudiante;
+import com.uce.edu.demo.tarea13.repository.modelo.EstudianteContadorCarrera;
+import com.uce.edu.demo.tarea13.repository.modelo.EstudianteSencillo;
 
 public interface IEstudianteJpaService {
 	public void insertar(Estudiante e);
@@ -21,4 +23,6 @@ public interface IEstudianteJpaService {
 	public List<Estudiante> buscarPorNombreContengaPalabraNamedNative(String palabra);
 	public List<Estudiante> buscarPorEdadCriteria(Integer edad);
 	public List<Estudiante> buscarPorCarreraCriteria(String carrera);
+	public List<EstudianteSencillo> buscarPorNombreApellidoSencillo(String nombre, String apellido);
+	public List<EstudianteContadorCarrera> buscarCantidadCarrera(String carrera);
 }

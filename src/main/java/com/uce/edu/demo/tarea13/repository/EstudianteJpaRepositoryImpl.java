@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.tarea13.repository.modelo.Estudiante;
+import com.uce.edu.demo.tarea13.repository.modelo.EstudianteContadorCarrera;
+import com.uce.edu.demo.tarea13.repository.modelo.EstudianteSencillo;
 
 @Repository
 @Transactional
@@ -178,6 +180,23 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository{
 		
 		return queryFinal.getResultList();
 
+	}
+
+	@Override
+	public List<EstudianteSencillo> buscarPorNombreApellidoSencillo(String nombre, String apellido) {
+		String sql = "SELECT NEW com.uce.edu.demo.tarea13.repository.modelo.EstudianteSencillo(e.nombre, e.apellido, e.carrera) FROM Estudiante e WHERE e.nombre = :datoNombre AND e.apellido = :datoApellido ORDER BY e.id ASC";
+		TypedQuery<EstudianteSencillo> myQuery = this.entityManager.createQuery(sql,EstudianteSencillo.class);
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteContadorCarrera> buscarCantidadCarrera(String carrera) {
+		String sql = "SELECT NEW com.uce.edu.demo.tarea13.repository.modelo.EstudianteContadorCarrera(e.carrera, count(e.carrera)) FROM Estudiante e WHERE e.carrera = :datoCarrera GROUP BY e.carrera ORDER BY e.carrera DESC";
+		TypedQuery<EstudianteContadorCarrera> myQuery = this.entityManager.createQuery(sql, EstudianteContadorCarrera.class);
+		myQuery.setParameter("datoCarrera", carrera);
+		return myQuery.getResultList();
 	}
 
 }

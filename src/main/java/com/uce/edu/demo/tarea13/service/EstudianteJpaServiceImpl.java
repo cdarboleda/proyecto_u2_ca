@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.tarea13.repository.IEstudianteJpaRepository;
 import com.uce.edu.demo.tarea13.repository.modelo.Estudiante;
+import com.uce.edu.demo.tarea13.repository.modelo.EstudianteContadorCarrera;
+import com.uce.edu.demo.tarea13.repository.modelo.EstudianteSencillo;
 
 @Service
 public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
@@ -107,6 +109,18 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
 	public List<Estudiante> buscarPorCarreraCriteria(String carrera) {
 		// TODO Auto-generated method stub
 		return this.estudianteJpaRepository.buscarPorCarreraCriteria(carrera);
+	}
+
+	@Override
+	public List<EstudianteSencillo> buscarPorNombreApellidoSencillo(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorNombreApellidoSencillo(nombre, apellido);
+	}
+
+	@Override
+	public List<EstudianteContadorCarrera> buscarCantidadCarrera(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarCantidadCarrera(carrera);
 	}
 
 }
