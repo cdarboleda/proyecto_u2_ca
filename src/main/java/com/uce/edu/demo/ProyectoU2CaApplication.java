@@ -11,10 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.prueba2.service.IMatriculaGestorService;
-import com.uce.edu.demo.prueba2.service.IPropietarioService;
-import com.uce.edu.demo.prueba2.service.IVehiculoService;
-import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 import com.uce.edu.demo.service.IPersonaJpaService;
 import com.uce.edu.demo.tarea13.repository.modelo.Estudiante;
 import com.uce.edu.demo.tarea13.service.IEstudianteJpaService;
@@ -43,23 +41,20 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 //    	e1.setCarrera("Diseño Gráfico");
 //    	//this.estudianteJpaService.insertar(e1);
 //
-    	//Criteria
-    	List<Estudiante> listaEst = this.estudianteJpaService.buscarPorCarreraCriteria("Computación");
-		logger.info("CRITERIA: Buscar por carrera: Computación"+
-				"\nSi la carrera es Computación buscar a los estudiantes con inicial C" +
-				"\nCaso contrario buscar a todos los que no son Computación");
-    	for(Estudiante e: listaEst) {
-    		logger.info(e);
+    	//Busqueda con objetos sencillos
+    	List<PersonaSencilla> listaPer = this.personaJpaService.buscarPorApellidoSencillo("Arboleda");
+
+    	for(PersonaSencilla p: listaPer) {
+    		logger.info(p);
     	}
     	
-    	List<Estudiante> listaEst1 = this.estudianteJpaService.buscarPorEdadCriteria(21);
-		logger.info("CRITERIA 2: Buscar por edad: 21"+
-				"\nSi la edad es número par devuelve los estudiantes que sean mayor o igual a esa edad" +
-				"\nCaso contrario devuelve a los que sean menor o igual a esa edad");
-    	for(Estudiante e: listaEst1) {
-    		logger.info(e);
+    	//Busqueda con objetos sencillos
+    	List<PersonaContadorGenero> listaPer2 = this.personaJpaService.consultarCantidadPorGenero();
+
+    	for(PersonaContadorGenero p: listaPer2) {
+    		logger.info(p);
     	}
-    	
+
     	
     }
 

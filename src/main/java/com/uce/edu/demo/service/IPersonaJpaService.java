@@ -3,6 +3,8 @@ package com.uce.edu.demo.service;
 import java.util.List;
 
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 
 public interface IPersonaJpaService {
 	public List<Persona> buscarPorGenero(String genero);
@@ -18,6 +20,8 @@ public interface IPersonaJpaService {
 	public Persona buscarPorCedulaCriteriaApi(String cedula);
 	public List<Persona> buscarDinamicamente(String nombre, String apellido, String genero);
 	public List<Persona> buscarDinamicamentePredicados(String nombre, String apellido, String genero);
+	public List<PersonaSencilla> buscarPorApellidoSencillo(String apellido);
+	public List<PersonaContadorGenero> consultarCantidadPorGenero();
 	public Persona buscarPorId(Integer id);
 	public void guardar(Persona persona);
 	public void actualizar(Persona persona);
