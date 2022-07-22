@@ -1,7 +1,7 @@
 package com.uce.edu.demo;
 
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
@@ -12,20 +12,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.repository.modelo.Ciudadano;
-import com.uce.edu.demo.repository.modelo.Empleado;
+import com.uce.edu.demo.repository.modelo.Pasaporte;
 import com.uce.edu.demo.service.ICiudadanoService;
-import com.uce.edu.demo.service.IPersonaJpaService;
-import com.uce.edu.demo.tarea13.service.IEstudianteJpaService;
+
+
 
 @SpringBootApplication
 public class ProyectoU2CaApplication implements CommandLineRunner{
 
 	private static final Logger logger = Logger.getLogger(ProyectoU2CaApplication.class);
-	
-	@Autowired
-	private IPersonaJpaService personaJpaService;
-	@Autowired
-	private IEstudianteJpaService estudianteJpaService;
 	
 	@Autowired
 	private ICiudadanoService ciudadanoService;
@@ -36,44 +31,41 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-    	
-//    	Estudiante e1 = new Estudiante();
-//    	e1.setNombre("Christian");
-//    	e1.setApellido("López");
-//    	e1.setEdad(21);
-//    	e1.setCarrera("Diseño Gráfico");
-//    	//this.estudianteJpaService.insertar(e1);
-//
-    	//Busqueda con objetos sencillos
-//    	List<PersonaSencilla> listaPer = this.personaJpaService.buscarPorApellidoSencillo("Arboleda");
-//
-//    	for(PersonaSencilla p: listaPer) {
-//    		logger.info(p);
-//    	}
-//    	
-//    	//Busqueda con objetos sencillos
-//    	List<PersonaContadorGenero> listaPer2 = this.personaJpaService.consultarCantidadPorGenero();
-//
-//    	for(PersonaContadorGenero p: listaPer2) {
-//    		logger.info(p);
-//    	}
+
     	
     	Ciudadano c1 = new Ciudadano();
     	c1.setNombre("David");
     	c1.setApellido("Jumbo");
+    	c1.setCedula("1725635214");
+    	c1.setFechaNacimiento(LocalDateTime.of(1999, 01,02,0,0));
     	
-    	//Un ciudadano no siempre va a ser un Empleado
+    	//Un ciudadano no siempre va a tener pasaporte
     	//this.ciudadanoService.insertar(c1);
-    	
-    	Empleado empl1 = new Empleado();
-    	empl1.setCiudadano(c1);
-    	empl1.setCodigoIess("12123");
-    	empl1.setSalario(new BigDecimal(100));
-    	
+//    	
+    	Pasaporte p1 = new Pasaporte();
+    	p1.setFechaCaducidad(LocalDateTime.of(2023, 11,22,0,0));
+    	p1.setFechaEmision(LocalDateTime.of(2022, 11,22,0,0));
+    	p1.setNumero("123457");
+//    	
+//    	
     	//Si es que seteamos un Empleado si antes establecer el Cascade en su atributo en Ciudadnano nos da error
-    	c1.setEmpleado(empl1);
-    	//Con el cascade, al insertar el ciudadano, se insertó el empleado
+    	c1.setPasaporte(p1);
+    	p1.setCiudadano(c1);
+//    	//Con el cascade, al insertar el ciudadano, se insertó el empleado
+    	logger.info("\n");
+    	logger.info("Insertar"+ c1);
     	this.ciudadanoService.insertar(c1);
+    	logger.info("\n");
+    	
+    	c1.setNombre("Andres");
+    	logger.info("Actualizar"+ c1);
+    	this.ciudadanoService.actualizar(c1);
+    	logger.info("\n");
+    	
+    	logger.info("Buscar por id 3"+this.ciudadanoService.buscarPorId(3)+"\n");
+    	
+    	logger.info("Eliminar por id 3");
+    	this.ciudadanoService.eliminarPorId(3);;
     	
     }
 
