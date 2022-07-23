@@ -2,9 +2,9 @@ package com.uce.edu.demo.service;
 
 import java.util.List;
 
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
-import com.uce.edu.demo.repository.modelo.PersonaSencilla;
+import com.uce.edu.demo.repository.modelo.onetoone.Persona;
+import com.uce.edu.demo.repository.modelo.onetoone.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.onetoone.PersonaSencilla;
 
 public interface IPersonaJpaService {
 	public List<Persona> buscarPorGenero(String genero);

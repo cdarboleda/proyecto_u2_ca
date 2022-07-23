@@ -14,9 +14,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
-import com.uce.edu.demo.repository.modelo.PersonaSencilla;
+import com.uce.edu.demo.repository.modelo.onetoone.Persona;
+import com.uce.edu.demo.repository.modelo.onetoone.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.onetoone.PersonaSencilla;
 
 @Repository
 @Transactional

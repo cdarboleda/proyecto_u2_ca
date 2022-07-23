@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.repository.IPersonaJpaRepository;
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
-import com.uce.edu.demo.repository.modelo.PersonaSencilla;
+import com.uce.edu.demo.repository.modelo.onetoone.Persona;
+import com.uce.edu.demo.repository.modelo.onetoone.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.onetoone.PersonaSencilla;
 
 @Service
 public class PersonaJpaServiceImpl implements IPersonaJpaService{
