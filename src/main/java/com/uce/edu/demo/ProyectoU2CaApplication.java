@@ -9,11 +9,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
-import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
 import com.uce.edu.demo.service.ICiudadanoService;
 import com.uce.edu.demo.service.IHabitacionService;
 import com.uce.edu.demo.service.IHotelService;
+import com.uce.edu.demo.tarea23.repository.modelo.Cliente;
+import com.uce.edu.demo.tarea23.service.IClienteService;
+import com.uce.edu.demo.tarea23.service.IFacturaService;
 
 
 
@@ -31,31 +32,41 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
 	@Autowired
 	private IHabitacionService habitacionService;
 	
+	@Autowired
+	private IClienteService clienteService;
+	
+	@Autowired
+	private IFacturaService facturaService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2CaApplication.class, args);
 	}
 
     @Override
     public void run(String... args) throws Exception {
-//    	Hotel hote = new Hotel();
-//    	hote.setNombre("Hilton Colon");
-//    	hote.setDireccion("Patria");
     	
-//    	logger.info("Inserción de hotel: ");
-//    	this.hotelService.insertar(hote);
+    	//Insertar un cliente sin factura
+    	logger.info("\nCreando un cliente sin factura: ");
+    	Cliente clie1 = new Cliente();
+    	clie1.setCedula("175143786");
+    	clie1.setNombre("Cristian");
+    	this.clienteService.insertar(clie1);
     	
-    	Habitacion habi1 = new Habitacion();
-    	habi1.setNumero("123456");
-    	habi1.setPiso("10");
-    	habi1.setTipo("Familiar");
+    	//Actualizar un cliente
+    	logger.info("\nActualizando un cliente: ");
+    	clie1.setNombre("Antonio");
+    	this.clienteService.actualizar(clie1);
     	
-    	//basta que tenga la referencia del id, y no todos los parametros
-    	Hotel hote1 = new Hotel();
-    	hote1.setId(1);
-    	habi1.setHotel(hote1);
+    	//Buscar un cliente
+    	logger.info("\nBuscando un cliente: ");
+    	Cliente c = this.clienteService.buscarPorId(4);
+    	logger.info(c);
     	
-    	logger.info("Inserción de habitacion: ");
-    	this.habitacionService.insertar(habi1);
+    	//Eliminar un cliente
+    	logger.info("\nEliminando un cliente: ");
+    	this.clienteService.eliminarPorId(4);
+    	
+    	
     }
 
 }
