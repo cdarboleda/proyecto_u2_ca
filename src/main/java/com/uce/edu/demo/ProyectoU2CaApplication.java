@@ -1,6 +1,9 @@
 package com.uce.edu.demo;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 import org.apache.log4j.Logger;
@@ -9,12 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.service.ICiudadanoService;
-import com.uce.edu.demo.service.IHabitacionService;
-import com.uce.edu.demo.service.IHotelService;
-import com.uce.edu.demo.tarea23.repository.modelo.Cliente;
-import com.uce.edu.demo.tarea23.service.IClienteService;
-import com.uce.edu.demo.tarea23.service.IFacturaService;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro;
+import com.uce.edu.demo.service.ILibroService;
 
 
 
@@ -22,21 +22,9 @@ import com.uce.edu.demo.tarea23.service.IFacturaService;
 public class ProyectoU2CaApplication implements CommandLineRunner{
 
 	private static final Logger logger = Logger.getLogger(ProyectoU2CaApplication.class);
-	
+
 	@Autowired
-	private ICiudadanoService ciudadanoService;
-	
-	@Autowired
-	private IHotelService hotelService;
-	
-	@Autowired
-	private IHabitacionService habitacionService;
-	
-	@Autowired
-	private IClienteService clienteService;
-	
-	@Autowired
-	private IFacturaService facturaService;
+	private ILibroService libroService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2CaApplication.class, args);
@@ -45,27 +33,19 @@ public class ProyectoU2CaApplication implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
     	
-    	//Insertar un cliente sin factura
-    	logger.info("\nCreando un cliente sin factura: ");
-    	Cliente clie1 = new Cliente();
-    	clie1.setCedula("175143786");
-    	clie1.setNombre("Cristian");
-    	this.clienteService.insertar(clie1);
+    	Libro lib1 = new Libro();
+    	lib1.setTitulo("Titulo 1");
+    	lib1.setCantidad_paginas(200);
     	
-    	//Actualizar un cliente
-    	logger.info("\nActualizando un cliente: ");
-    	clie1.setNombre("Antonio");
-    	this.clienteService.actualizar(clie1);
+    	Autor autor1 = new Autor();
+    	autor1.setNombre("Cristian");
     	
-    	//Buscar un cliente
-    	logger.info("\nBuscando un cliente: ");
-    	Cliente c = this.clienteService.buscarPorId(4);
-    	logger.info(c);
+    	Set<Autor> autores = new HashSet<>();
+    	autores.add(autor1);
     	
-    	//Eliminar un cliente
-    	logger.info("\nEliminando un cliente: ");
-    	this.clienteService.eliminarPorId(4);
+    	lib1.setAutores(autores);
     	
+    	this.libroService.insertar(lib1);
     	
     }
 
