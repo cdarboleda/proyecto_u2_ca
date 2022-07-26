@@ -1,9 +1,5 @@
 package com.uce.edu.demo.repository;
 
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Repository;
-
 import com.uce.edu.demo.repository.modelo.manytomany.Autor;
 
 public interface IAutorRepository {
