@@ -23,16 +23,16 @@ public class PropietarioRepositoryImpl implements IPropietarioRepository {
 	}
 
 	@Override
-	public void eliminar(String cedula) {
+	public void eliminarPorId(Integer id) {
 		// TODO Auto-generated method stub
-		Propietario p = this.entityManager.find(Propietario.class, cedula);
+		Propietario p = this.entityManager.find(Propietario.class, id);
 		this.entityManager.remove(p);
 	}
 
 	@Override
-	public Propietario consultar(String cedula) {
+	public Propietario consultarPorId(Integer id) {
 		// TODO Auto-generated method stub	
-		return this.entityManager.find(Propietario.class, cedula);
+		return this.entityManager.find(Propietario.class, id);
 	}
 
 }

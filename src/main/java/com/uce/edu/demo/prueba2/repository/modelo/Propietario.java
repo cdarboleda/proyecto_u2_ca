@@ -1,17 +1,26 @@
 package com.uce.edu.demo.prueba2.repository.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "propietario")
 public class Propietario {
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prop_id_seq")
+	@SequenceGenerator(name = "prop_id_seq", sequenceName = "prop_id_seq", allocationSize = 1)
+	@Column(name = "prop_id")
+	private Integer id;
+	
 	@Column(name = "prop_cedula")
 	private String cedula;
 	@Column(name = "prop_nombre")
@@ -20,6 +29,9 @@ public class Propietario {
 	private String apellido;
 	@Column(name = "prop_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
+	
+	@OneToMany(mappedBy = "propietario")
+	private List<Matricula> matriculas;
 	
 	@Override
 	public String toString() {
@@ -51,6 +63,22 @@ public class Propietario {
 	}
 	public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

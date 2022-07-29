@@ -5,25 +5,33 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Entity
 @Table(name = "matricula")
 public class Matricula {
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matr_id_seq")
+	@SequenceGenerator(name = "matr_id_seq", sequenceName = "matr_id_seq", allocationSize = 1)
 	@Column(name = "matr_id")
 	private Integer id;
+	
 	@Column(name = "matr_fecha")
 	private LocalDateTime fechaMatricula;
 	@Column(name = "matr_valor")
 	private BigDecimal valorMatricula;
-	@ManyToOne
+	
+	@ManyToOne()
 	@JoinColumn(name = "matr_propietario")
 	private Propietario propietario;
-	@OneToOne
+	
+	@OneToOne()
 	@JoinColumn(name = "matr_vehiculo")
 	private Vehiculo vehiculo;
 	

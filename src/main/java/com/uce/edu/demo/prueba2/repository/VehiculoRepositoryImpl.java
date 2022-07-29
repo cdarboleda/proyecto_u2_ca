@@ -21,9 +21,9 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository{
 	}
 
 	@Override
-	public Vehiculo buscar(String placa) {
+	public Vehiculo buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Vehiculo.class, placa);
+		return this.entityManager.find(Vehiculo.class, id);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository{
 	}
 
 	@Override
-	public void eliminar(String placa) {
+	public void eliminarPorId(Integer id) {
 		// TODO Auto-generated method stub
-		Vehiculo p = this.entityManager.find(Vehiculo.class, placa);
+		Vehiculo p = this.entityManager.find(Vehiculo.class, id);
 		this.entityManager.remove(p);
 	}
 

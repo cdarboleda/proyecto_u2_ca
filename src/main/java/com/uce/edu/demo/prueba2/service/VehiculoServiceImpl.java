@@ -19,9 +19,9 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	}
 
 	@Override
-	public Vehiculo buscar(String placa) {
+	public Vehiculo buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
-		return this.vehiculoRepository.buscar(placa);
+		return this.vehiculoRepository.buscarPorId(id);
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	}
 
 	@Override
-	public void eliminar(String placa) {
+	public void eliminarPorId(Integer id) {
 		// TODO Auto-generated method stub
-		this.vehiculoRepository.eliminar(placa);
+		this.vehiculoRepository.eliminarPorId(id);
 	}
 
 }
